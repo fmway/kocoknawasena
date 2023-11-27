@@ -1,0 +1,42 @@
+body {
+    margin: 0;
+    font-family: Poppins;
+    background-image:url(bg.jpg);
+    background-size: cover;
+    background-position:center;
+    background-repeat:no-repeat;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2F88FF;
+    padding: 10px 20px;
+    color: white;
+    box-shadow: 0 6px 5px rgba(0, 0, 0, 0.123);;
+}
+
+
+h1{
+    color: #2F88FF;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: rgb(255, 255, 255);;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-right a {
+    margin-left: 20px;
+    color: white;
+    text-decoration: none;
+}
+
