@@ -1,0 +1,19 @@
+.body {
+  background-image: linear-gradient(white 70%, #bfbfbf9f, #6D9FFF);
+  background-repeat: no-repeat;
+}
+
+.navH1 {
+  text-shadow: 0 4px rgba(0,0,0, 0.25);
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: rgb(255, 255, 255);;
+}
+
+.gearHover {
+  animation: spin-button-in .8s;
+}
+
+.gearUnhover {
+  animation: spin-button-out .8s;
+}
+
