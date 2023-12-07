@@ -16,6 +16,11 @@
   animation: spin-button-out .8s;
 }
 
+.blur {
+  backdrop-filter: blur(20px);
+  background-color: #9EC8B9;
+}
+
 @keyframes spin-button-in {
   0% {
       transform: rotate(0);

@@ -1,0 +1,123 @@
+.container {
+    display: flex;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    position: fixed;
+    border-collapse: collapse;
+    justify-content: center;
+    z-index: 9;
+    color: grey;
+}
+
+.wrapper {
+    width: 420px;
+    margin: auto 0;
+    background-color: #FFF7D4;
+    border: 2px solid rgba(255, 255, 255, .2);
+    /* backdrop-filter: blur(20px); */
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    color: grey;
+    border-radius: 10px;
+    padding: 30px 40px;
+}
+
+.wrapper h1 {
+    font-size: 36px;
+    text-align: center;
+}
+
+.wrapper .inputBox {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: auto;
+    margin-top: 30px;
+}
+
+.inputBox input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid grey;
+    border-radius: 40px;
+    font-size: 16px;
+    color: grey;
+    padding: 20px 45px 20px 20px;
+}
+
+.inputBox input::placeholder {
+    color: grey;
+}
+
+.inputBox i {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+}
+
+.wrapper .rememberForgot {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14.5px;
+    margin: 15px 0 15px;
+}
+
+.rememberForgot label input {
+    accent-color: grey;
+    margin-right: 3px;
+}
+
+.rememberForgot a {
+    color: grey;
+    text-decoration: none;
+}
+
+.rememberForgot a:hover {
+    text-decoration: underline;
+}
+
+.wrapper .btn {
+    width: 100%;
+    height: 45px;
+    background: grey;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    cursor: pointer;
+    font-size: 16px;
+    color: #FFF7D4;
+    font-weight: 600;
+}
+
+.btn:hover {
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    background-color:rgb(156, 245, 183)
+}
+
+.wrapper .registerLink {
+    font-size: 14.5px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.registerLink p a {
+    color: grey;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+p .split{
+    text-align: center;
+}
+
+.registerLink p a:hover {
+    text-decoration: underline;
+}
