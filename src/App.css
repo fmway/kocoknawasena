@@ -1,4 +1,4 @@
-body {
+.body {
   background-image: linear-gradient(white 70%, #bfbfbf9f, #6D9FFF);
   background-repeat: no-repeat;
 }
@@ -9,10 +9,14 @@ body {
 }
 
 #nav #profile-icon svg:hover {
-  animation: spin-button .8s;
+  animation: spin-button-in .8s;
 }
 
-@keyframes spin-button {
+.nav-unhover {
+  animation: spin-button-out .8s;
+}
+
+@keyframes spin-button-in {
   0% {
       transform: rotate(0);
       /* animation-timing-function:cubic-bezier(0.215, 0.055, 0.675, 0.19); */
@@ -22,6 +26,21 @@ body {
       animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1);
   } */
   100% {
-      transform: rotate(180deg);
+      transform: rotate(120deg);
   }
 }
+
+@keyframes spin-button-out {
+  0% {
+      transform: rotate(0);
+      /* animation-timing-function:cubic-bezier(0.215, 0.055, 0.675, 0.19); */
+  }
+  /* 50% {
+      transform: rotate(90deg);
+      animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1);
+  } */
+  100% {
+      transform: rotate(-120deg);
+  }
+}
+
