@@ -7,13 +7,15 @@
     position: fixed;
     border-collapse: collapse;
     justify-content: center;
-    z-index: 9;
+    z-index: 9999;
     color: grey;
 }
 
 .wrapper {
     width: 420px;
-    margin: auto 0;
+    max-height: calc(100vh - 25px);
+    overflow-y: scroll;
+    margin: auto 5px;
     background-color: #FFF7D4;
     border: 2px solid rgba(255, 255, 255, .2);
     /* backdrop-filter: blur(20px); */

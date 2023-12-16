@@ -10,12 +10,10 @@ import { auth } from "./utils/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useFirebase } from 'react-redux-firebase';
 import { connect } from 'react-redux';
-import { configureStore } from '@reduxjs/toolkit';
-import Profile from './components/Profile';
+
 
 
 export default function App(props) {
-  
   let listKelompok = [
     {
       nama: "Kelompok 1",
@@ -49,10 +47,16 @@ export default function App(props) {
       list: []
     }
   ];
+  const firebase = useFirebase();
+  const createNewUser = ({ username, email, password }) => {
+    firebase.createUser({ email, password }, { username, email });
+  };
+  
   const coba = () => {
     console.log("waduh");
+    console.dir(firebase);
     // firebase.createUser({ email: "namaku1801@gmail.com", password: 'suanjingbanget' }). then(v => console.log(v.email)).catch(e => console.dir(e));
-    // createNewUser({ email: 'namaku1801@gmail.com', password: 'asuasu', username: 'namaku1801' });
+    createNewUser({ email: 'namaku1801@gmail.com', password: 'asuasu', username: 'namaku1801' });
     //createUserWithEmailAndPassword(auth, "namaku@gmail.com", "passwordkuh").then(x => {
     //   console.log(x.user.email)
     // })
@@ -66,7 +70,7 @@ export default function App(props) {
     //   Halo <br />
     //   <button onClick={coba}>duh</button>
     // </div>
-    <Home />
-    // <button onClick={coba}>click</button>
+    // <Home {...props} />
+    <button onClick={coba}>click</button>
     );
 }
