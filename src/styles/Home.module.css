@@ -1,5 +1,17 @@
 .body {
-    /* font-family: 'The Augusta'; */
     background-image: linear-gradient(white 70%, #bfbfbf9f, #6D9FFF);
     background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 1;
+    position: relative;
+}
+.bg {
+    background-image: url(/img/bege.jpg);
+    opacity: .2;
+    z-index: -1;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
 }

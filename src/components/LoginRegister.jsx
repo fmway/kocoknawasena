@@ -14,15 +14,15 @@ const reduxState = (state) => ({
     email: state.email,
     popup: state.popup,
     alert: state.alert,
-  });
+});
   
-  const reduxDispatch = (dispatch) => ({
+const reduxDispatch = (dispatch) => ({
     setPopup: (value) => dispatch({ type: 'CHANGE_POPUP', value }),
     setEmail: (value) => dispatch({ type: 'CHANGE_EMAIL', value}),
     setUsername: (value) => dispatch({ type: 'CHANGE_USER', value}),
     setLogin: (value) => dispatch({ type: 'CHANGE_ISLOGIN', value}),
     setAlert: (value) => dispatch({ type: 'CHANGE_ALERT', value }),
-  });
+});
 
 /* eslint-disable no-unused-vars */
 function LoginRegister(props) {
@@ -122,11 +122,11 @@ function LoginRegister(props) {
             });
     }
 
-    useEffect(() => getEmail(username), []);
+    useEffect(() => getEmail(username), [username]);
     return (
         <div className={styles.container}>
             <div className={styles.wrapper}>
-                <button onClick={() => props.setPopup('')}>X</button>
+                <button className="rounded-full text-slate-700 hover:text-slate-400 absolute top-1 right-1" onClick={() => props.setPopup('')}><i className='bx bx-x bx-sm'></i></button>
                 <form action="">
                     <h1>{title}</h1>
                     <div className={styles.inputBox}>
@@ -164,10 +164,12 @@ function LoginRegister(props) {
                         <GoogleButton onClick={signWithGoogle} />
                     </div>
                 </form>
-                <button onClick={getEmail.bind(this, "aku")}>asu</button>
             </div>
+            <div onClick={() => props.setPopup("")} className="w-screen fixed z-10 h-screen top-0 left-0"></div>
         </div>
     );
 }
 
-export default connect(reduxState, reduxDispatch)(LoginRegister);
+const Pages = connect(reduxState, reduxDispatch)(LoginRegister);
+
+export default Pages;

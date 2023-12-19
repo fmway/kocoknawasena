@@ -1,29 +1,126 @@
-import { useState } from "react";
+/* eslint-disable react/prop-types */
+import { useEffect, useState } from "react";
 import styles from "../styles/Home.module.css";
-import Login from "./Login";
-import Register from "./Register";
-import LoginRegister from "./LoginRegister";
-import { connect } from "react-redux";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth, database } from "../utils/firebase";
+import { onValue, ref } from "firebase/database";
 import Profile from "./Profile";
+import History from "./History";
+import LoginRegister from "./LoginRegister";
+import Result from "./Result";
+import { connect } from "react-redux";
+import { randomKelompok } from "../utils/functions";
 
 const reduxState = (state) => ({
   isLogin: state.isLogin,
   userName: state.user,
   email: state.email,
   popup: state.popup,
+  emailVerified: state.emailVerified,
+  listOrang: state.listOrang,
+  kelompok: state.kelompok,
 });
 
 const reduxDispatch = (dispatch) => ({
-  setPopup: (value) => dispatch({ type: 'CHANGE_POPUP', value })
+  setLogin: (value) => dispatch({ type: 'CHANGE_ISLOGIN', value }),
+  setUsername: (value) => dispatch({ type: 'CHANGE_USER', value }),
+  setEmail: (value) => dispatch({ type: 'CHANGE_EMAIL', value }),
+  setEmailVerified: (value) => dispatch({ type: 'CHANGE_EMAILVERIFIED', value }),
+  setPopup: (value) => dispatch({ type: 'CHANGE_POPUP', value }),
+  setListOrang: (value) => dispatch({ type: 'CHANGE_ORANG', value }),
+  setKelompok: (value) => dispatch({ type: 'CHANGE_KELOMPOK', value }),
 });
 
 function Home(props) {
   const isLogin = props.isLogin;
-  const [, setBlur] = useState(true);
-  const [mode, setMode] = useState('');
+  const [listOrang, setListOrang] = useState('');
+  const [jumlahkelompok, setJumlahKelompok] = useState(0);
+  const [judulKelompok, setJudulKelompok] = useState('');
+
+  const listOrangToString = (listOrang=[]) => {
+    let hasil = "";
+    listOrang.sort().forEach(el => hasil += el + "\n");
+    return hasil.slice(0, -1);
+  }
+  const listOrangToArray = () => {
+    const hasil = [];
+    listOrang.split(/\n/).forEach(e => {
+      const str = String(e).trim();
+      str != "" && hasil.push(str)
+    });
+    return hasil;
+  };
+
+  const doRandom = () => {
+    if (!jumlahkelompok) {
+      alert('jumlahnya kok 0?');
+      return
+    }
+    const x = listOrangToArray();
+    if (!x.length) {
+      alert('lah orangnya mana?');
+      return
+    }
+    const hasil = randomKelompok(x, jumlahkelompok);
+    props.setKelompok({
+      judul: judulKelompok != "" ? judulKelompok : "Tanpa Judul",
+      list: hasil.map((e, i) => ({ nama: `Kelompok ${i+1}`, list: e })),
+    });
+    props.setPopup('result');
+  };
+
+  const getUsername = (email) => {
+    const dbRef = ref(database, "users/login");
+    // let res = undefined;
+    onValue(dbRef, (snapshot) => {
+        snapshot.forEach(x => {
+            const user = x.val();
+            if (user.email == email) {
+                props.setUsername(user.username)
+            }
+        })
+    });
+    // return res;
+  }
+
+  const getKelasB = () => {
+    const dbRef = ref(database, "users/B");
+    const res = [];
+    onValue(dbRef, (snapshot) => {
+      snapshot.forEach(x => {
+        res.push(x.val());
+      })
+    })
+    setListOrang(listOrangToString((res)));
+    return res;
+  }
+
+  useEffect(() => {
+    onAuthStateChanged(auth, user => {
+      if (user) {
+        getUsername(user.email);
+        getUsername(user.email);
+        props.setLogin(true);
+        props.setEmail(user.email);
+        props.setEmailVerified(user.emailVerified);
+      } else {
+        props.setUsername('');
+        props.setLogin(false);
+        props.setEmail('');
+        props.setEmailVerified(false);
+        setListOrang(listOrangToString((getKelasB())));
+      }
+    });
+  }, [])
+
+  useEffect(() => {
+  }, [props.email]);
+
+
   return (
     <div className={styles.body}>
-      <div className='mx-auto min-h-screen'>
+      <div className={styles.bg}></div>
+      <div className='mx-auto min-h-screen relative'>
         <nav className='nav bg-primary drop-shadow-xl' id='nav'>
           <div className='flex justify-between mx-auto px-3 py-1'>
             <div className='text-2xl font-black text-primary'>
@@ -34,7 +131,7 @@ function Home(props) {
               </div>
             </div>
             <div className="flex justify-between text-6xl text-white">
-              <button className="mr-3">
+              <button onClick={getKelasB} className="mr-3">
                   <i className='bx bx-history'></i>
               </button>
               { !isLogin ? 
@@ -64,16 +161,21 @@ function Home(props) {
               <p className='text-primary'></p>
             </div>
             <form className='px-12'>
-              <h3 className='w-full bg-primary rounded-2xl py-1 mb-2 text-white text-center text-lg'>INPUT YOUR TEAM HERE</h3>
+              <input type='text' className='w-full bg-primary rounded-2xl py-1 mb-2 text-white text-center text-lg placeholder:text-white' placeholder="INPUT YOUR TEAM HERE" onChange={setJudulKelompok} value={judulKelompok}/>
               <div className='grid grid-cols-2 gap-2'>
-                <input type='text' placeholder='kreator' id='kreator' className='p-2 drop-shadow-xl rounded-2xl bg-secondary flex' value={props.userName} />
-                <input type='number' placeholder='Jumlah kelompok' id='jumlahkelompok' className='drop-shadow-xl p-2 rounded-2xl bg-secondary flex' />
+                <input type='text' placeholder='kreator' id='kreator' className='p-2 drop-shadow-xl rounded-2xl bg-secondary flex' onChange={(e) => props.setUsername(e.target.value)} value={props.userName} disabled={isLogin} />
+                <input type='number' placeholder='Jumlah kelompok' id='jumlahkelompok' className='drop-shadow-xl p-2 rounded-2xl bg-secondary flex' onChange={(e) => setJumlahKelompok(Number(e.target.value))} />
               </div>
-              <textarea placeholder='List Nama' className='resize-none h-48 drop-shadow-xl my-4 w-full p-4 bg-secondary px-3 rounded-2xl'></textarea>
+              <div className="relative">
+                <textarea placeholder='List Nama' className='resize-none h-48 drop-shadow-xl my-4 w-full p-4 bg-secondary px-3 rounded-2xl' onChange={(e) => setListOrang(e.target.value)} value={listOrang}></textarea>
+                <button onClick={(e) => (e.preventDefault(), getKelasB())} className="hover:text-slate-400 absolute top-6 right-2">
+                  <i className='bx bx-sm bx-refresh'></i>
+                </button>
+              </div>
             </form>
             <div className='flex justify-center items-center'>
               <div className="relative p-6">
-                  <button className='bg-primary text-white font-semibold text-2xl md:text-4xl mb-8 -mt-3 md:mt-0 p-2 md:p-4 rounded-2xl'>
+                  <button onClick={doRandom} className='bg-primary text-white font-semibold text-2xl md:text-4xl mb-8 -mt-3 md:mt-0 p-2 md:p-4 rounded-2xl'>
                       KOCOK
                       <img className="w-16 absolute -top-1 right-2" src="/img/dice.png" />
                   </button>
@@ -82,19 +184,17 @@ function Home(props) {
           </section>
         </div>
       </div>
-      <button onClick={() => console.dir(props.firebase)}>asu</button>
-      {/* {
-        mode == "login" ? <Login setMode={setMode} /> : mode == "register" ? <Register setMode={setMode} /> : ""
-      } */}
       {String(props.popup).includes("sign") && <LoginRegister />}
-      {/* <Login /> */}
-      {/* <Register /> */}
       {props.popup == "profile" && <Profile />}
+      {props.popup == "result" && <Result />}
+      {props.popup == "history" && <History />}
     </div>
   )
 }
 
-export default connect(reduxState, reduxDispatch)(Home)
+const Pages = connect(reduxState, reduxDispatch)(Home);
+
+export default Pages;
 
 
 // export default function Home() {

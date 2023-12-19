@@ -23,6 +23,7 @@
     padding: 40px 70px;
     color: #fff;
     position: relative;
+    z-index: 11;
     border-radius: 20px;
     width: 100%;
     max-width: 90vw;
@@ -45,7 +46,7 @@
 }
 
 
-.profileBox button {
+.profileBox .btn {
     width: 50%;
     height: 45px;
     background: #fff;
@@ -61,10 +62,11 @@
 }
 
 .profileBox .set {
-    width: 0px;
     position: absolute;
+    display: flex;
     right: 35px;
     top: 0px;
+    padding-left: 5px;
 }
 
 .set .sett {

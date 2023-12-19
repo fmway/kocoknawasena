@@ -1,11 +1,49 @@
-import { applyMiddleware, configureStore } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 
 const initialState = {
     popup: '',
     isLogin: false,
     user: '',
     email: '',
+    emailVerified: false,
     alert: '',
+    kelompok: { 
+      judul: 'Tanpa Judul',
+      list: [
+      {
+        nama: "Kelompok 1",
+        list: [
+          "Prabowo",
+          "Dedi Mulyadi",
+          "Ridwan Kamil",
+          "Moh Fikri"
+        ]
+      },
+      {
+        nama: "Kelompok 2",
+        list: [
+          "Ganjar",
+          "Mahfud",
+          "Megawhatt",
+          "Hilma"
+        ]
+      },
+      {
+        nama: "Kelompok 3",
+        list: [
+          "Anies",
+          "Cak Imin",
+          "Udin",
+          "Petot"
+        ]
+      },
+      {
+        nama: "",
+        list: []
+      }
+      ],
+    },
+    listOrang: [],
   };
   
   /**
@@ -43,6 +81,24 @@ const initialState = {
       return {
         ...state,
         alert: action.value
+      }
+    }
+    if (action.type === 'CHANGE_EMAILVERIFIED') {
+      return {
+        ...state,
+        emailVerified: action.value,
+      }
+    }
+    if (action.type === 'CHANGE_KELOMPOK') {
+      return {
+        ...state,
+        kelompok: action.value,
+      }
+    }
+    if (action.type === 'CHANGE_ORANG') {
+      return {
+        ...state,
+        listOrang: action.value,
       }
     }
     return state;

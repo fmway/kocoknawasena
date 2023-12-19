@@ -13,7 +13,7 @@
 
 .wrapper {
     width: 420px;
-    max-height: calc(100vh - 25px);
+    max-height: calc(100vh - 160px);
     overflow-y: scroll;
     margin: auto 5px;
     background-color: #FFF7D4;
@@ -22,6 +22,8 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
     color: grey;
     border-radius: 10px;
+    position: relative;
+    z-index: 11;
     padding: 30px 40px;
 }
 

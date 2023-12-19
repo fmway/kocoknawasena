@@ -15,12 +15,12 @@ import { getDatabase } from "firebase/database";
 export const firebaseConfig = {
   apiKey: "AIzaSyCwKs-EUL8L1OaSNjs8uy_-BtAC3rhfu6I",
   authDomain: "kocoknawasena.firebaseapp.com",
+  databaseURL: "https://kocoknawasena-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "kocoknawasena",
   storageBucket: "kocoknawasena.appspot.com",
   messagingSenderId: "604081062531",
-  appId: "1:604081062531:web:376a3fbe900f002bdb91b6",
-  measurementId: "G-YW4F8S3BQ8",
-  databaseURL: "kocoknawasena-default-rtdb.asia-southeast1.firebasedatabase.app",
+  appId: "1:604081062531:web:ea1cd0cc8c4fe590db91b6",
+  measurementId: "G-FXV4ED197D",
 };
 
 // Initialize Firebase
