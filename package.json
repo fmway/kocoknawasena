@@ -11,14 +11,18 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.0.1",
+    "daisyui": "^4.4.22",
     "firebase": "^10.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-google-button": "^0.7.2",
+    "react-mobile-share": "^1.0.30",
     "react-redux": "^9.0.4",
+    "react-slidedown": "^2.4.7",
     "redux": "^5.0.0",
     "redux-firestore": "^2.0.1",
-    "redux-thunk": "^3.1.0"
+    "redux-thunk": "^3.1.0",
+    "swiper": "^11.0.5"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",

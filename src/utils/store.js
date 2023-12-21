@@ -1,47 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 const initialState = {
+    idUser: '',
+    allHistory: false,
     popup: '',
     isLogin: false,
     user: '',
     email: '',
     emailVerified: false,
     alert: '',
-    kelompok: { 
-      judul: 'Tanpa Judul',
-      list: [
-      {
-        nama: "Kelompok 1",
-        list: [
-          "Prabowo",
-          "Dedi Mulyadi",
-          "Ridwan Kamil",
-          "Moh Fikri"
-        ]
-      },
-      {
-        nama: "Kelompok 2",
-        list: [
-          "Ganjar",
-          "Mahfud",
-          "Megawhatt",
-          "Hilma"
-        ]
-      },
-      {
-        nama: "Kelompok 3",
-        list: [
-          "Anies",
-          "Cak Imin",
-          "Udin",
-          "Petot"
-        ]
-      },
-      {
-        nama: "",
-        list: []
-      }
-      ],
+    idResult: '',
+    kelompok: {
+      judul: '',
+      list: [],
     },
     listOrang: [],
   };
@@ -101,10 +72,28 @@ const initialState = {
         listOrang: action.value,
       }
     }
+    if (action.type === 'CHANGE_IDUSER') {
+      return {
+        ...state,
+        idUser: action.value,
+      }
+    }
+    if (action.type === 'CHANGE_ALLHISTORY') {
+      return {
+        ...state,
+        idHistory: action.value,
+      }
+    }
+    if (action.type === 'CHANGE_IDRESULT') {
+      return {
+        ...state,
+        idResult: action.value,
+      }
+    }
     return state;
   };
   
   export const store = configureStore({
     reducer,
-  })
+  });
   

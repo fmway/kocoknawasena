@@ -8,22 +8,33 @@
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  background-color: rgba(255, 255, 255, 0);
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .cardHistory {
   z-index: 11;
-  background-color: rgb(164, 255, 191);
-  border-radius: 5px;
+  background-color: rgb(75, 153, 255);
+  border-radius: 15px;
   padding: 20px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
   width: 500px;
   height: auto;
+  max-height: 70vh;
+  overflow-y: scroll;
   text-align: center;
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
   font-family: poppins, sans-serif;
   justify-content: center;
+}
+
+.cardHistory h2 {
+  font-size: 25px;
+  font-weight: bolder;
+  text-shadow: 2px 2px rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  -webkit-text-stroke-width: 1px;
+	-webkit-text-stroke-color: rgb(255, 255, 255);
 }
   
 .cardHistory:hover {
@@ -40,7 +51,8 @@
   display: inline-block;
   width: 80%;
   margin-top: 2px;
-  background-color: rgb(137, 155, 255);
+  border-radius: 25px;
+  background-color: rgb(255, 209, 56);
   text-align: center;
   cursor: pointer;
   padding: 14px 16px;
@@ -48,5 +60,5 @@
 }
 
 .cardHistory li button:hover {
-  background-color: #ff6060;
+  background-color: #34d1d1;
 }

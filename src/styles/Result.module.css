@@ -1,21 +1,15 @@
 .body {
-	position: fixed;
+	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
 	bottom: 0;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 	box-sizing: border-box;
 	backdrop-filter: blur(20px);
   	background-color: #9EC8B9;
+	overflow: scroll;
 }
 
-.container {
-	z-index: 11;
-	padding: 10px;
-}
 
 .card {
 	background-color: rgb(255, 217, 0);
@@ -46,8 +40,6 @@
 .card h3 {
 	font-size: 24px;
 	border: 5px solid rgb(255, 156, 7);
-	-webkit-text-stroke-width: 1px;
-	-webkit-text-stroke-color: rgb(255, 255, 255);
 	border-radius: 5px;
 	color:rgb(255, 154, 22);
 	margin-bottom: 20px;

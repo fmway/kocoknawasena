@@ -1,11 +1,10 @@
 /* eslint-disable react/prop-types */
 import { GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { useEffect, useState } from "react";
-import { auth, database, db } from "../utils/firebase";
+import { auth, database } from "../utils/firebase";
 import GoogleButton from "react-google-button";
 import styles from "../styles/Form.module.css";
 import { connect } from "react-redux";
-import { addDoc, collection, doc, getDoc } from "firebase/firestore";
 import { onValue, ref, set } from "firebase/database";
 
 const reduxState = (state) => ({
